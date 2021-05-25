@@ -1,0 +1,22 @@
+
+h1 {
+    background-color: lightblue;
+    color: white;
+    padding: 10px;
+}
+
+.nav-item {
+    cursor: pointer;
+}
+
+.mainpanel {
+    margin-top:40px;
+}
+
+.btn-modal {
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    visibility:collapse;
+}

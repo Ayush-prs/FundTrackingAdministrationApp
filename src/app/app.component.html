@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-5">
+      <h1>Admin Tool</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ul #tabelement class="nav nav-tabs">
+        <li class="nav-item">
+          <div class="nav-link active" (click)="onTabClicked(1)">
+            Subscribe to a fund
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" (click)="onTabClicked(2)">
+            Existing Subscriptions
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" (click)="onTabClicked(3)">Analytics</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngIf="this.selectedTab === 1" class="col-md-4 offset-md-3 mainpanel">
+      <button #modalbutton  type="button" class="btn-modal" data-toggle="modal" data-target="#myModal"></button>
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Operation Status</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>{{modalmessage}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form (ngSubmit)="onAdd(form)" #form="ngForm">
+        <div class="form-group">
+          <label>Fund Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            required
+            [(ngModel)]="addFundData.fundname"
+            name="fundinput"
+          />
+        </div>
+        <div class="form-group">
+          <label>Search String:</label>
+          <input
+            type="text"
+            class="form-control"
+            required
+            [(ngModel)]="addFundData.searchquery"
+            name="queryinput"
+          />
+        </div>
+        <div class="form-group">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!form.valid || form.submitted"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="this.selectedTab === 2" class="col-md-4 offset-md-3 mainpanel">
+      <button class="btn btn-primary" (click) = "fetchFundsList()">Refresh</button>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let fund of fundslist">
+          {{ fund.fundname }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
